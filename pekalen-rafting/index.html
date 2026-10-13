@@ -32,21 +32,18 @@
     <div class="container navbar-container">
       <!-- Logo Pekalen Rafting -->
       <a href="#home" class="navbar-brand" aria-label="Beranda Pekalen Rafting">
-        <img src="images/logo-pekalen.png" alt="Logo Resmi Pekalen Rafting" class="navbar-logo" width="140" height="48">
-        <div class="navbar-brand-text">
-          <span class="navbar-brand-title">PEKALEN <span>RAFTING</span></span>
-          <span class="navbar-brand-subtitle">Probolinggo • Jawa Timur</span>
-        </div>
+        <img src="images/logo-pekalen.png" alt="Logo Resmi Pekalen Rafting" class="navbar-logo" width="165" height="48">
       </a>
 
       <!-- Menu Navigasi Desktop & Mobile Drawer -->
       <nav class="navbar-menu" id="navbar-menu" aria-label="Menu Utama">
         <ul class="navbar-links">
           <li><a href="#home" class="navbar-link active">Home</a></li>
-          <li><a href="#about" class="navbar-link">About Us</a></li>
-          <li><a href="#packages" class="navbar-link">Paket Rafting</a></li>
-          <li><a href="#gallery" class="navbar-link">Gallery</a></li>
-          <li><a href="#contact" class="navbar-link">Contact</a></li>
+          <li><a href="#about" class="navbar-link">Tentang Kami</a></li>
+          <li><a href="#services" class="navbar-link">Produk & Aktivitas</a></li>
+          <li><a href="#gallery" class="navbar-link">Galeri</a></li>
+          <li><a href="#penginapan" class="navbar-link">Penginapan</a></li>
+          <li><a href="#contact" class="navbar-link">Kontak</a></li>
         </ul>
         <div class="navbar-actions">
           <a href="#booking" class="btn btn-primary nav-action-btn">
@@ -190,13 +187,201 @@
     </section>
 
     <!-- ======================================================================
-         4. PAKET RAFTING SECTION
-         Pilihan paket wisata dalam bentuk kartu interaktif
+         4. PRODUK & AKTIVITAS WISATA SECTION
+         Enam layanan wisata outdoor dan akomodasi unggulan Pekalen Rafting
          ====================================================================== -->
-    <section class="section section-bg-light" id="packages">
+    <section class="section section-bg-light" id="services">
       <div class="container">
         <div class="section-header">
-          <div class="section-badge">Pilihan Paket</div>
+          <div class="section-badge">&#127754; Produk & Aktivitas Wisata</div>
+          <h2 class="section-title">Pilihan Aktivitas Outdoor & Akomodasi Pekalen</h2>
+          <p class="section-subtitle">
+            Jelajahi beragam petualangan seru dan sarana menginap di tengah keindahan alam Sungai Pekalen, Desa Pesawahan, Tiris, Probolinggo.
+          </p>
+        </div>
+
+        <!-- Filter Tab Kategori Layanan -->
+        <div class="services-filter-tabs" role="tablist" aria-label="Filter Layanan Wisata">
+          <button type="button" class="services-tab-btn active" data-service-filter="all">Semua Layanan (6)</button>
+          <button type="button" class="services-tab-btn" data-service-filter="adventure">Aktivitas Petualangan (3)</button>
+          <button type="button" class="services-tab-btn" data-service-filter="stay">Penginapan & Camp (3)</button>
+        </div>
+
+        <!-- Grid 6 Kartu Produk & Aktivitas -->
+        <div class="services-grid" id="services-grid">
+          <!-- Layanan 1: Rafting -->
+          <article class="service-card" data-category="adventure" data-service-id="rafting">
+            <div class="service-image-wrap">
+              <img src="images/service-rafting.jpg" alt="Aktivitas Rafting Pekalen" class="service-image" loading="lazy">
+              <span class="service-category-badge">Petualangan Air</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Rafting</h3>
+              <p class="service-card-desc">
+                Petualangan menyusuri Sungai Pekalen dengan arus sungai, jeram, dan panorama alam yang menarik.
+              </p>
+              <div class="service-highlights-box">
+                <span class="service-highlight-tag">&#9875; Grade II - IV</span>
+                <span class="service-highlight-tag">&#9201; ± 2 - 3 Jam</span>
+                <span class="service-highlight-tag">&#127754; Air Terjun Alami</span>
+              </div>
+              <div class="service-card-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-service-detail" data-service="rafting" aria-label="Lihat Detail Rafting">
+                  Lihat Detail
+                </button>
+                <a href="https://wa.me/6285236183600?text=Halo%20Pekalen%20Rafting%2C%20saya%20ingin%20bertanya%20dan%20melakukan%20pemesanan%20layanan%20Rafting.%20Mohon%20informasi%20mengenai%20harga%2C%20fasilitas%2C%20dan%20jadwal%20yang%20tersedia." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm btn-service-wa" aria-label="Pesan Rafting via WhatsApp">
+                  <span class="wa-icon">&#128172;</span> Pesan via WA
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Layanan 2: Paintball -->
+          <article class="service-card" data-category="adventure" data-service-id="paintball">
+            <div class="service-image-wrap">
+              <img src="images/service-paintball.jpg" alt="Aktivitas Paintball Outdoor Pekalen" class="service-image" loading="lazy">
+              <span class="service-category-badge">Team Building</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Paintball</h3>
+              <p class="service-card-desc">
+                Aktivitas permainan strategi dan kerja sama tim yang cocok untuk kegiatan kelompok, komunitas, gathering, dan outing.
+              </p>
+              <div class="service-highlights-box">
+                <span class="service-highlight-tag">&#127919; Jungle Arena</span>
+                <span class="service-highlight-tag">&#128101; Kerjasama Tim</span>
+                <span class="service-highlight-tag">&#128737; Safety Gear</span>
+              </div>
+              <div class="service-card-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-service-detail" data-service="paintball" aria-label="Lihat Detail Paintball">
+                  Lihat Detail
+                </button>
+                <a href="https://wa.me/6285236183600?text=Halo%20Pekalen%20Rafting%2C%20saya%20ingin%20bertanya%20dan%20melakukan%20pemesanan%20layanan%20Paintball.%20Mohon%20informasi%20mengenai%20harga%2C%20fasilitas%2C%20dan%20jadwal%20yang%20tersedia." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm btn-service-wa" aria-label="Pesan Paintball via WhatsApp">
+                  <span class="wa-icon">&#128172;</span> Pesan via WA
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Layanan 3: Canyoning -->
+          <article class="service-card" data-category="adventure" data-service-id="canyoning">
+            <div class="service-image-wrap">
+              <img src="images/service-canyoning.jpg" alt="Aktivitas Canyoning Sungai Pekalen" class="service-image" loading="lazy">
+              <span class="service-category-badge">Eksplorasi Ngarai</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Canyoning</h3>
+              <p class="service-card-desc">
+                Aktivitas petualangan menjelajahi aliran sungai, tebing, dan air terjun dengan perlengkapan serta pendampingan keselamatan yang sesuai.
+              </p>
+              <div class="service-highlights-box">
+                <span class="service-highlight-tag">&#129698; Rappelling Tebing</span>
+                <span class="service-highlight-tag">&#127754; Air Terjun</span>
+                <span class="service-highlight-tag">&#128295; Standar Pro</span>
+              </div>
+              <div class="service-card-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-service-detail" data-service="canyoning" aria-label="Lihat Detail Canyoning">
+                  Lihat Detail
+                </button>
+                <a href="https://wa.me/6285236183600?text=Halo%20Pekalen%20Rafting%2C%20saya%20ingin%20bertanya%20dan%20melakukan%20pemesanan%20layanan%20Canyoning.%20Mohon%20informasi%20mengenai%20harga%2C%20fasilitas%2C%20dan%20jadwal%20yang%20tersedia." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm btn-service-wa" aria-label="Pesan Canyoning via WhatsApp">
+                  <span class="wa-icon">&#128172;</span> Pesan via WA
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Layanan 4: Penginapan (Target Anchor Navigasi #penginapan) -->
+          <article class="service-card" id="penginapan" data-category="stay" data-service-id="penginapan">
+            <div class="service-image-wrap">
+              <img src="images/service-penginapan.jpg" alt="Fasilitas Penginapan Pekalen" class="service-image" loading="lazy">
+              <span class="service-category-badge">Akomodasi Nyaman</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Penginapan</h3>
+              <p class="service-card-desc">
+                Fasilitas menginap untuk wisatawan yang ingin beristirahat dan menikmati suasana alam Pekalen lebih lama.
+              </p>
+              <div class="service-highlights-box">
+                <span class="service-highlight-tag">&#127969; Villa & Cottage</span>
+                <span class="service-highlight-tag">&#127807; Udara Asri</span>
+                <span class="service-highlight-tag">&#128716; Bersih & Nyaman</span>
+              </div>
+              <div class="service-card-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-service-detail" data-service="penginapan" aria-label="Lihat Detail Penginapan">
+                  Lihat Detail
+                </button>
+                <a href="https://wa.me/6285236183600?text=Halo%20Pekalen%20Rafting%2C%20saya%20ingin%20bertanya%20dan%20melakukan%20pemesanan%20layanan%20Penginapan.%20Mohon%20informasi%20mengenai%20harga%2C%20fasilitas%2C%20dan%20jadwal%20yang%20tersedia." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm btn-service-wa" aria-label="Pesan Penginapan via WhatsApp">
+                  <span class="wa-icon">&#128172;</span> Pesan via WA
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Layanan 5: Camping Ground -->
+          <article class="service-card" data-category="stay" data-service-id="camping-ground">
+            <div class="service-image-wrap">
+              <img src="images/service-camping.jpg" alt="Area Camping Ground Pekalen" class="service-image" loading="lazy">
+              <span class="service-category-badge">Outdoor Camping</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Camping Ground</h3>
+              <p class="service-card-desc">
+                Area berkemah di alam terbuka yang cocok untuk kegiatan bersama teman, keluarga, komunitas, dan kegiatan outdoor.
+              </p>
+              <div class="service-highlights-box">
+                <span class="service-highlight-tag">&#9978; Tenda Dome</span>
+                <span class="service-highlight-tag">&#128293; Api Unggun</span>
+                <span class="service-highlight-tag">&#127774; Tepi Sungai</span>
+              </div>
+              <div class="service-card-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-service-detail" data-service="camping-ground" aria-label="Lihat Detail Camping Ground">
+                  Lihat Detail
+                </button>
+                <a href="https://wa.me/6285236183600?text=Halo%20Pekalen%20Rafting%2C%20saya%20ingin%20bertanya%20dan%20melakukan%20pemesanan%20layanan%20Camping%20Ground.%20Mohon%20informasi%20mengenai%20harga%2C%20fasilitas%2C%20dan%20jadwal%20yang%20tersedia." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm btn-service-wa" aria-label="Pesan Camping Ground via WhatsApp">
+                  <span class="wa-icon">&#128172;</span> Pesan via WA
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Layanan 6: Glamping Ground -->
+          <article class="service-card" data-category="stay" data-service-id="glamping-ground">
+            <div class="service-image-wrap">
+              <img src="images/service-glamping.jpg" alt="Glamping Ground Mewah Pekalen" class="service-image" loading="lazy">
+              <span class="service-category-badge">Glamorous Camp</span>
+            </div>
+            <div class="service-card-body">
+              <h3 class="service-card-title">Glamping Ground</h3>
+              <p class="service-card-desc">
+                Pengalaman menginap di tengah alam dengan konsep tenda yang lebih nyaman dan fasilitas yang lebih praktis dibandingkan camping biasa.
+              </p>
+              <div class="service-highlights-box">
+                <span class="service-highlight-tag">&#10024; Safari Luxury</span>
+                <span class="service-highlight-tag">&#128716; Kasur Empuk</span>
+                <span class="service-highlight-tag">&#127796; Deck Pribadi</span>
+              </div>
+              <div class="service-card-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-service-detail" data-service="glamping-ground" aria-label="Lihat Detail Glamping Ground">
+                  Lihat Detail
+                </button>
+                <a href="https://wa.me/6285236183600?text=Halo%20Pekalen%20Rafting%2C%20saya%20ingin%20bertanya%20dan%20melakukan%20pemesanan%20layanan%20Glamping%20Ground.%20Mohon%20informasi%20mengenai%20harga%2C%20fasilitas%2C%20dan%20jadwal%20yang%20tersedia." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm btn-service-wa" aria-label="Pesan Glamping Ground via WhatsApp">
+                  <span class="wa-icon">&#128172;</span> Pesan via WA
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. PAKET RAFTING SECTION
+         Pilihan paket wisata dalam bentuk kartu interaktif
+         ====================================================================== -->
+    <section class="section" id="packages">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Pilihan Paket Rafting</div>
           <h2 class="section-title">Pilihan Paket Wisata Rafting</h2>
           <p class="section-subtitle">
             Pilih jalur arung jeram terbaik yang sesuai dengan keinginan petualangan Anda bersama keluarga, teman, atau rekan kerja.
@@ -450,6 +635,66 @@
     </div>
 
     <!-- ======================================================================
+         MODAL DETAIL LAYANAN WISATA
+         Dialog interaktif untuk menampilkan detail layanan & order WhatsApp
+         ====================================================================== -->
+    <div class="service-modal" id="service-modal" role="dialog" aria-modal="true" aria-labelledby="modal-service-title" aria-hidden="true">
+      <div class="service-modal-backdrop" id="service-modal-backdrop"></div>
+      <div class="service-modal-dialog">
+        <button type="button" class="service-modal-close" id="service-modal-close" aria-label="Tutup Detail Layanan">&times;</button>
+        <div class="service-modal-header">
+          <img src="" alt="" id="modal-service-img" class="service-modal-img">
+          <span class="service-modal-badge" id="modal-service-badge">Kategori</span>
+        </div>
+        <div class="service-modal-body">
+          <div class="service-modal-title-wrap">
+            <h3 class="service-modal-title" id="modal-service-title">Nama Layanan</h3>
+            <p class="service-modal-tagline" id="modal-service-tagline">Tagline Layanan</p>
+          </div>
+
+          <div class="service-modal-info-grid">
+            <div class="service-modal-info-item">
+              <span class="info-item-label">&#9201; Durasi / Ketentuan</span>
+              <span class="info-item-val" id="modal-service-duration">-</span>
+            </div>
+            <div class="service-modal-info-item">
+              <span class="info-item-label">&#128101; Cocok Untuk</span>
+              <span class="info-item-val" id="modal-service-suitable">-</span>
+            </div>
+            <div class="service-modal-info-item">
+              <span class="info-item-label">&#128205; Lokasi Kegiatan</span>
+              <span class="info-item-val" id="modal-service-location">-</span>
+            </div>
+          </div>
+
+          <div class="service-modal-desc-section">
+            <h4 class="service-modal-subtitle">Deskripsi Lengkap</h4>
+            <p id="modal-service-desc" class="service-modal-desc-text"></p>
+          </div>
+
+          <div class="service-modal-highlights-section">
+            <h4 class="service-modal-subtitle">Fasilitas & Keunggulan</h4>
+            <ul class="service-modal-highlights-list" id="modal-service-highlights">
+              <!-- Diisi otomatis oleh JavaScript -->
+            </ul>
+          </div>
+
+          <div class="service-modal-note-box">
+            <strong>Informasi Pemesanan:</strong> Jadwal kegiatan dan tarif paket resmi disesuaikan dengan jumlah peserta dan tanggal yang Anda pilih. Silakan berkonsultasi langsung dengan admin Pekalen Rafting melalui WhatsApp.
+          </div>
+        </div>
+        <div class="service-modal-footer">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block btn-lg" id="modal-service-wa-btn">
+            <span class="wa-icon">&#128172;</span> Pesan via WhatsApp
+          </a>
+          <button type="button" class="btn btn-secondary btn-block" id="modal-service-booking-btn">
+            Pilih pada Formulir Booking Web &darr;
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
          6. FORM RESERVASI SECTION
          Formulir pemesanan dengan ringkasan otomatis & konfirmasi WhatsApp
          ====================================================================== -->
@@ -501,12 +746,24 @@
                 <div class="form-group">
                   <label for="package-select" class="form-label">Pilihan Paket <span class="required">*</span></label>
                   <select id="package-select" name="package" class="form-select" required>
-                    <option value="" disabled selected>-- Pilih Paket Rafting --</option>
-                    <option value="pekalen-atas">Pekalen Atas (± 2-3 Jam)</option>
-                    <option value="pekalen-bawah">Pekalen Bawah (± 2-3 Jam)</option>
-                    <option value="paket-rombongan">Paket Rombongan / Outing</option>
+                    <option value="" disabled selected>-- Pilih Layanan / Paket Wisata --</option>
+                    <optgroup label="Aktivitas Petualangan">
+                      <option value="rafting">Rafting Sungai Pekalen</option>
+                      <option value="paintball">Paintball War Game Outdoor</option>
+                      <option value="canyoning">Canyoning & Waterfall Rappelling</option>
+                    </optgroup>
+                    <optgroup label="Pilihan Jalur Rafting">
+                      <option value="pekalen-atas">Pekalen Atas (± 2-3 Jam)</option>
+                      <option value="pekalen-bawah">Pekalen Bawah (± 2-3 Jam)</option>
+                      <option value="paket-rombongan">Paket Rombongan / Outing</option>
+                    </optgroup>
+                    <optgroup label="Penginapan & Camping">
+                      <option value="penginapan">Penginapan Villa / Cottage</option>
+                      <option value="camping-ground">Camping Ground Tepi Sungai</option>
+                      <option value="glamping-ground">Glamping Ground Mewah</option>
+                    </optgroup>
                   </select>
-                  <span class="form-error-msg">Silakan pilih paket arung jeram.</span>
+                  <span class="form-error-msg">Silakan pilih layanan atau paket wisata.</span>
                 </div>
 
                 <div class="form-group">
@@ -696,21 +953,24 @@
           <h4 class="footer-col-title">Navigasi</h4>
           <ul class="footer-links">
             <li><a href="#home" class="footer-link">Home</a></li>
-            <li><a href="#about" class="footer-link">About Us</a></li>
-            <li><a href="#packages" class="footer-link">Paket Rafting</a></li>
-            <li><a href="#gallery" class="footer-link">Gallery</a></li>
-            <li><a href="#contact" class="footer-link">Contact</a></li>
+            <li><a href="#about" class="footer-link">Tentang Kami</a></li>
+            <li><a href="#services" class="footer-link">Produk & Aktivitas</a></li>
+            <li><a href="#gallery" class="footer-link">Galeri</a></li>
+            <li><a href="#penginapan" class="footer-link">Penginapan</a></li>
+            <li><a href="#contact" class="footer-link">Kontak</a></li>
           </ul>
         </div>
 
-        <!-- Kolom Layanan Paket -->
+        <!-- Kolom Layanan Wisata -->
         <div>
-          <h4 class="footer-col-title">Layanan</h4>
+          <h4 class="footer-col-title">Layanan Wisata</h4>
           <ul class="footer-links">
-            <li><a href="#packages" class="footer-link">Pekalen Atas</a></li>
-            <li><a href="#packages" class="footer-link">Pekalen Bawah</a></li>
-            <li><a href="#packages" class="footer-link">Paket Rombongan</a></li>
-            <li><a href="#booking" class="footer-link">Reservasi Online</a></li>
+            <li><a href="#services" class="footer-link">Rafting Sungai Pekalen</a></li>
+            <li><a href="#services" class="footer-link">Paintball Outdoor</a></li>
+            <li><a href="#services" class="footer-link">Canyoning & Air Terjun</a></li>
+            <li><a href="#penginapan" class="footer-link">Penginapan Villa/Cottage</a></li>
+            <li><a href="#penginapan" class="footer-link">Camping Ground</a></li>
+            <li><a href="#penginapan" class="footer-link">Glamping Ground</a></li>
           </ul>
         </div>
 

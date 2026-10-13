@@ -11,15 +11,197 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ----------------------------------------------------------------------------
-   * 1. DATA MASTER PAKET RAFTING
-   * Berisi data paket rafting, deskripsi, dan estimasi harga resmi jika ada.
-   * Nilai null pada harga menandakan tarif konfirmasi langsung ke pengelola.
+   * 0. KONFIGURASI UTAMA WHATSAPP
+   * Nomor WhatsApp resmi pengelola Pekalen Rafting (mudah diubah sewaktu-waktu)
+   * ---------------------------------------------------------------------------- */
+  const OFFICIAL_WHATSAPP = '6285236183600';
+
+  // Generator tautan pemesanan WhatsApp otomatis sesuai format baku
+  function createWhatsAppServiceLink(serviceName) {
+    const text = `Halo Pekalen Rafting, saya ingin bertanya dan melakukan pemesanan layanan ${serviceName}. Mohon informasi mengenai harga, fasilitas, dan jadwal yang tersedia.`;
+    return `https://wa.me/${OFFICIAL_WHATSAPP}?text=${encodeURIComponent(text)}`;
+  }
+
+  /* ----------------------------------------------------------------------------
+   * 1. DATA MASTER PRODUK & AKTIVITAS WISATA (6 LAYANAN UTAMA)
+   * Data lengkap untuk kartu layanan, modal detail, dan pemesanan WhatsApp
+   * ---------------------------------------------------------------------------- */
+  const servicesData = {
+    'rafting': {
+      id: 'rafting',
+      name: 'Rafting',
+      tagline: 'Sensasi Petualangan Arung Jeram Sungai Pekalen Probolinggo',
+      categoryBadge: 'Petualangan Air',
+      image: 'images/service-rafting.jpg',
+      duration: '± 2 - 3 Jam (10 - 12 KM)',
+      suitable: 'Keluarga, Sahabat, Komunitas & Outing Perusahaan',
+      location: 'Sungai Pekalen, Desa Pesawahan, Tiris',
+      shortDesc: 'Petualangan menyusuri Sungai Pekalen dengan arus sungai, jeram, dan panorama alam yang menarik.',
+      fullDesc: 'Nikmati petualangan arung jeram yang memadukan tantangan, kebersamaan, dan keindahan alam Sungai Pekalen di Probolinggo, Jawa Timur. Terkenal dengan tebing-tebing batu alami eksotis, air terjun alami yang mengalir langsung ke bibir sungai, serta jeram dinamis grade II hingga IV yang siap menguji adrenalin secara aman didampingi pemandu berpengalaman.',
+      highlights: [
+        'Pilihan rute Pekalen Atas (±12 KM) dan Pekalen Bawah (±10 KM)',
+        'Melintasi pemandangan air terjun alami dan tebing batuan purba',
+        'Didampingi instruktur sungai bersertifikat & tim rescue',
+        'Perlengkapan standar keselamatan: perahu karet, helm, & pelampung (life jacket)',
+        'Transportasi lokal basecamp ke titik start dan sajian kuliner tradisional'
+      ]
+    },
+    'paintball': {
+      id: 'paintball',
+      name: 'Paintball',
+      tagline: 'Aktivitas Permainan Strategi & Team Building di Alam Terbuka',
+      categoryBadge: 'Team Building',
+      image: 'images/service-paintball.jpg',
+      duration: '± 1 - 2 Jam (Sesuai skenario)',
+      suitable: 'Gathering Kantor, Komunitas, Outing, Mahasiswa & Teman',
+      location: 'Outdoor Jungle Arena Basecamp Pekalen',
+      shortDesc: 'Aktivitas permainan strategi dan kerja sama tim yang cocok untuk kegiatan kelompok, komunitas, gathering, dan outing.',
+      fullDesc: 'Aktivitas simulasi pertempuran taktis luar ruangan yang dirancang khusus untuk meningkatkan kekompakan, kepemimpinan, dan komunikasi kelompok. Berlatar alam tropis yang rimbun dan asri, peserta akan terlibat dalam beragam skenario permainan taktis menarik dengan panduan wasit profesional dan standar peralatan keselamatan yang terjamin.',
+      highlights: [
+        'Arena pertempuran outdoor alami dengan barikade dan rintangan kayu taktis',
+        'Peralatan lengkap: Google mask standar, rompi pelindung (vest), dan marker semi-otomatis',
+        'Peluru cat biodegradable yang ramah lingkungan dan aman bagi peserta',
+        'Didampingi wasit (marshal) dan instruktur pengarah strategi permainan',
+        'Sangat pas dikombinasikan dengan paket rafting dan agenda gathering'
+      ]
+    },
+    'canyoning': {
+      id: 'canyoning',
+      name: 'Canyoning',
+      tagline: 'Jelajah Ngarai, Tebing Curam & Air Terjun Alami Pekalen',
+      categoryBadge: 'Eksplorasi Ngarai',
+      image: 'images/service-canyoning.jpg',
+      duration: '± 2 - 4 Jam',
+      suitable: 'Pencinta Adrenalin, Komunitas Outdoor & Petualang Alam',
+      location: 'Ngarai Sungai & Air Terjun Pekalen, Tiris',
+      shortDesc: 'Aktivitas petualangan menjelajahi aliran sungai, tebing, dan air terjun dengan perlengkapan serta pendampingan keselamatan yang sesuai.',
+      fullDesc: 'Jelajahi keindahan tersembunyi ngarai sungai Pekalen melalui petualangan canyoning yang memacu adrenalin. Paduan seru antara menuruni tebing air terjun alami (waterfall abseiling/rappelling), menyusuri ngarai berbatu, meluncur di perosotan batuan alami, dan berenang di kolam alami yang jernih. Semua dilakukan dengan perlengkapan standar keselamatan internasional.',
+      highlights: [
+        'Menuruni tebing air terjun alami dengan teknik rappelling yang aman',
+        'Menyusuri celah batuan tebing alami dan kolam pegunungan yang eksotis',
+        'Peralatan teknis profesional: harness, carabiner, helm, & pelampung',
+        'Briefing keselamatan intensif & pendampingan pemandu ahli',
+        'Spot foto petualangan ekstrem dengan latar ngarai sungai yang memukau'
+      ]
+    },
+    'penginapan': {
+      id: 'penginapan',
+      name: 'Penginapan',
+      tagline: 'Fasilitas Menginap Nyaman dengan Nuansa Alami Pedesaan',
+      categoryBadge: 'Akomodasi Nyaman',
+      image: 'images/service-penginapan.jpg',
+      duration: 'Check-in 14:00 • Check-out 12:00',
+      suitable: 'Keluarga, Rombongan Perusahaan, Wisatawan Luar Kota',
+      location: 'Kawasan Basecamp Pekalen Rafting, Pesawahan, Tiris',
+      shortDesc: 'Fasilitas menginap untuk wisatawan yang ingin beristirahat dan menikmati suasana alam Pekalen lebih lama.',
+      fullDesc: 'Fasilitas menginap yang nyaman dan sejuk bagi wisatawan yang ingin beristirahat sebelum atau setelah berarung jeram. Mengusung konsep villa dan cottage bernuansa alami pedesaan dengan pemandangan hijau asri, menghadirkan ketenangan maksimal untuk melepas penat dari hiruk-pikuk perkotaan.',
+      highlights: [
+        'Kamar tidur bersih, rapi, dan sejuk alami khas pegunungan',
+        'Kamar mandi dalam dengan pasokan air bersih pegunungan',
+        'Gazebo dan area teras santai untuk berkumpul bersama keluarga/rombongan',
+        'Akses sangat dekat dengan titik kumpul dan basecamp rafting',
+        'Tersedia layanan sajian hidangan tradisional lokal pedesaan'
+      ]
+    },
+    'camping-ground': {
+      id: 'camping-ground',
+      name: 'Camping Ground',
+      tagline: 'Berkemah di Bawah Langit Terbuka Tepi Sungai Pekalen',
+      categoryBadge: 'Outdoor Camping',
+      image: 'images/service-camping.jpg',
+      duration: 'Paket Menginap 2 Hari 1 Malam (2D1N)',
+      suitable: 'Komunitas, Mahasiswa, Reuni, Pramuka & Keluarga Petualang',
+      location: 'Riverside Campsite Pekalen, Tiris',
+      shortDesc: 'Area berkemah di alam terbuka yang cocok untuk kegiatan bersama teman, keluarga, komunitas, dan kegiatan outdoor.',
+      fullDesc: 'Area berkemah di alam terbuka berumput hijau tepat di tepi aliran sungai yang menyejukkan. Sangat pas untuk menghabiskan malam kebersamaan bersama sahabat, keluarga, atau komunitas pecinta alam dengan suasana api unggun, udara segar perbukitan, dan suara aliran air yang menentramkan jiwa.',
+      highlights: [
+        'Area ground lapang, bersih, datar, dan aman di pinggir alam terbuka',
+        'Tenda dome berkualitas lengkap dengan matras dan alas tidur nyaman',
+        'Area api unggun khusus untuk malam keakraban dan kegiatan santai',
+        'Fasilitas toilet serta sarana MCK bersih di dekat area ground',
+        'Pengawasan dan pendampingan petugas basecamp 24 jam'
+      ]
+    },
+    'glamping-ground': {
+      id: 'glamping-ground',
+      name: 'Glamping Ground',
+      tagline: 'Pengalaman Menginap Elegan & Nyaman di Tengah Alam Asri',
+      categoryBadge: 'Glamorous Camp',
+      image: 'images/service-glamping.jpg',
+      duration: 'Paket Menginap 2 Hari 1 Malam (2D1N)',
+      suitable: 'Pasangan, Keluarga Modern, Staycation & Healing Alam',
+      location: 'Exclusive Hill & Riverside Zone Pekalen',
+      shortDesc: 'Pengalaman menginap di tengah alam dengan konsep tenda yang lebih nyaman dan fasilitas yang lebih praktis dibandingkan camping biasa.',
+      fullDesc: 'Pengalaman menginap eksklusif di alam bebas dengan memadukan keindahan panorama Sungai Pekalen dan kenyamanan fasilitas modern. Dilengkapi tenda safari premium dengan kasur empuk, stopkontak listrik, pencahayaan estetik, dan deck teras pribadi. Solusi sempurna untuk menikmati sensasi bermalam di alam tanpa mengorbankan kenyamanan istirahat.',
+      highlights: [
+        'Tenda safari glamping eksklusif dengan tempat tidur nyaman & sprei bersih',
+        'Pencahayaan estetik, colokan listrik untuk pengisian gadget, & fasilitas pendukung',
+        'Deck kayu privat dengan pemandangan alam terbuka yang asri dan estetik',
+        'Akses kamar mandi modern yang higienis dan terawat',
+        'Suasana tenang, privat, dan sangat cocok untuk foto dokumentasi liburan'
+      ]
+    }
+  };
+
+  /* ----------------------------------------------------------------------------
+   * 2. DATA MASTER PAKET RAFTING & LAYANAN BOOKING
+   * Berisi seluruh paket dan aktivitas untuk sinkronisasi ringkasan formulir
    * ---------------------------------------------------------------------------- */
   const raftingPackages = {
+    // 6 Layanan Utama
+    'rafting': {
+      name: 'Rafting Sungai Pekalen',
+      duration: '± 2-3 Jam (10-12 KM)',
+      price: null,
+      priceText: 'Hubungi Kami',
+      grade: 'Grade II - IV',
+      highlight: 'Air Terjun & Tebing Alami'
+    },
+    'paintball': {
+      name: 'Paintball War Game Outdoor',
+      duration: '± 1-2 Jam',
+      price: null,
+      priceText: 'Hubungi Kami',
+      grade: 'Strategi & Outing',
+      highlight: 'Jungle Arena & Safety Gear'
+    },
+    'canyoning': {
+      name: 'Canyoning & Waterfall Rappelling',
+      duration: '± 2-4 Jam',
+      price: null,
+      priceText: 'Hubungi Kami',
+      grade: 'Petualangan Ngarai',
+      highlight: 'Air Terjun & Standard Pro'
+    },
+    'penginapan': {
+      name: 'Penginapan Villa / Cottage',
+      duration: 'Check-in 14:00 • Check-out 12:00',
+      price: null,
+      priceText: 'Hubungi Kami',
+      grade: 'Akomodasi Nyaman',
+      highlight: 'Villa Asri & Suasana Sejuk'
+    },
+    'camping-ground': {
+      name: 'Camping Ground Tepi Sungai',
+      duration: '2 Hari 1 Malam (2D1N)',
+      price: null,
+      priceText: 'Hubungi Kami',
+      grade: 'Outdoor Camping',
+      highlight: 'Tenda Dome & Api Unggun'
+    },
+    'glamping-ground': {
+      name: 'Glamping Ground Mewah',
+      duration: '2 Hari 1 Malam (2D1N)',
+      price: null,
+      priceText: 'Hubungi Kami',
+      grade: 'Glamorous Camping',
+      highlight: 'Safari Tent & Deck Pribadi'
+    },
+    // Paket Jalur Rafting Spesifik
     'pekalen-atas': {
       name: 'Pekalen Atas',
       duration: '± 2-3 Jam (12 KM)',
-      price: null, // Hubungi kami untuk penawaran resmi
+      price: null,
       priceText: 'Hubungi Kami',
       grade: 'Grade II - IV',
       highlight: 'Air Terjun & Tebing Alami'
@@ -285,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
     text += `- Jumlah Peserta: ${count} orang\n\n`;
     text += `Mohon informasi ketersediaan jadwal. Terima kasih!`;
 
-    quickWaBtn.href = `https://wa.me/6285236183600?text=${encodeURIComponent(text)}`;
+    quickWaBtn.href = `https://wa.me/${OFFICIAL_WHATSAPP}?text=${encodeURIComponent(text)}`;
   }
 
   // Tambahkan event listener untuk update live
@@ -389,18 +571,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const participants = participantsInput.value.trim();
       const notes = notesInput?.value.trim() || '-';
 
-      let waMessage = `Halo Admin Pekalen Rafting, saya ingin mengajukan reservasi wisata arung jeram:\n\n`;
+      let waMessage = `Halo Admin Pekalen Rafting, saya ingin mengajukan reservasi wisata arung jeram & outdoor:\n\n`;
       waMessage += `*DATA RESERVASI:*\n`;
       waMessage += `- *Nama Lengkap:* ${name}\n`;
       waMessage += `- *Nomor WhatsApp:* ${phone}\n`;
       waMessage += `- *Email:* ${email}\n`;
-      waMessage += `- *Paket Wisata:* ${packageName}\n`;
+      waMessage += `- *Layanan/Paket:* ${packageName}\n`;
       waMessage += `- *Tanggal Kunjungan:* ${dateFormatted}\n`;
       waMessage += `- *Jumlah Peserta:* ${participants} orang\n`;
       waMessage += `- *Catatan Tambahan:* ${notes}\n\n`;
-      waMessage += `Mohon konfirmasi ketersediaan jadwal dan estimasi total biayanya. Terima kasih!`;
+      waMessage += `Mohon informasi jadwal ketersediaan dan detail resminya. Terima kasih!`;
 
-      const targetUrl = `https://wa.me/6285236183600?text=${encodeURIComponent(waMessage)}`;
+      const targetUrl = `https://wa.me/${OFFICIAL_WHATSAPP}?text=${encodeURIComponent(waMessage)}`;
 
       // Tampilkan notifikasi sukses di halaman
       if (bookingAlert) {
@@ -413,6 +595,144 @@ document.addEventListener('DOMContentLoaded', () => {
       window.open(targetUrl, '_blank', 'noopener,noreferrer');
     });
   }
+
+  /* ----------------------------------------------------------------------------
+   * 6b. PRODUK & AKTIVITAS WISATA (FILTER TAB, MODAL DETAIL & ORDER WA)
+   * Mengatur filter kategori, modal info lengkap, dan tombol pesan WhatsApp
+   * ---------------------------------------------------------------------------- */
+  const serviceFilterTabs = document.querySelectorAll('.services-tab-btn');
+  const serviceCards = document.querySelectorAll('.service-card');
+  const serviceDetailBtns = document.querySelectorAll('.btn-service-detail');
+
+  // Elemen modal detail layanan
+  const serviceModal = document.getElementById('service-modal');
+  const serviceModalBackdrop = document.getElementById('service-modal-backdrop');
+  const serviceModalClose = document.getElementById('service-modal-close');
+  const modalServiceImg = document.getElementById('modal-service-img');
+  const modalServiceBadge = document.getElementById('modal-service-badge');
+  const modalServiceTitle = document.getElementById('modal-service-title');
+  const modalServiceTagline = document.getElementById('modal-service-tagline');
+  const modalServiceDuration = document.getElementById('modal-service-duration');
+  const modalServiceSuitable = document.getElementById('modal-service-suitable');
+  const modalServiceLocation = document.getElementById('modal-service-location');
+  const modalServiceDesc = document.getElementById('modal-service-desc');
+  const modalServiceHighlights = document.getElementById('modal-service-highlights');
+  const modalServiceWaBtn = document.getElementById('modal-service-wa-btn');
+  const modalServiceBookingBtn = document.getElementById('modal-service-booking-btn');
+
+  // 1. Filter Kategori Produk & Aktivitas (Semua, Adventure, Stay)
+  serviceFilterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      serviceFilterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filterVal = tab.getAttribute('data-service-filter');
+      serviceCards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (filterVal === 'all' || cardCat === filterVal) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 2. Fungsi Buka Modal Detail Layanan
+  function openServiceModal(serviceKey) {
+    const service = servicesData[serviceKey];
+    if (!service || !serviceModal) return;
+
+    if (modalServiceImg) {
+      modalServiceImg.src = service.image;
+      modalServiceImg.alt = `${service.name} - Pekalen Rafting`;
+    }
+    if (modalServiceBadge) modalServiceBadge.textContent = service.categoryBadge;
+    if (modalServiceTitle) modalServiceTitle.textContent = service.name;
+    if (modalServiceTagline) modalServiceTagline.textContent = service.tagline;
+    if (modalServiceDuration) modalServiceDuration.textContent = service.duration;
+    if (modalServiceSuitable) modalServiceSuitable.textContent = service.suitable;
+    if (modalServiceLocation) modalServiceLocation.textContent = service.location;
+    if (modalServiceDesc) modalServiceDesc.textContent = service.fullDesc;
+
+    if (modalServiceHighlights) {
+      modalServiceHighlights.innerHTML = service.highlights
+        .map(item => `<li><span class="highlight-icon">&#10003;</span><span>${item}</span></li>`)
+        .join('');
+    }
+
+    // Tombol WhatsApp resmi di dalam modal dengan pesan otomatis
+    if (modalServiceWaBtn) {
+      modalServiceWaBtn.href = createWhatsAppServiceLink(service.name);
+    }
+
+    // Tombol untuk mengarahkan ke form booking
+    if (modalServiceBookingBtn) {
+      modalServiceBookingBtn.onclick = () => {
+        closeServiceModal();
+        if (packageSelectInput) {
+          packageSelectInput.value = serviceKey;
+          packageSelectInput.dispatchEvent(new Event('change'));
+        }
+        if (bookingSection) {
+          bookingSection.scrollIntoView({ behavior: 'smooth' });
+          setTimeout(() => {
+            document.getElementById('booking-name')?.focus();
+          }, 450);
+        }
+      };
+    }
+
+    serviceModal.classList.add('active');
+    serviceModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 3. Fungsi Tutup Modal Detail Layanan
+  function closeServiceModal() {
+    if (!serviceModal) return;
+    serviceModal.classList.remove('active');
+    serviceModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Event listener tombol "Lihat Detail" di setiap kartu layanan
+  serviceDetailBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const serviceKey = btn.getAttribute('data-service');
+      openServiceModal(serviceKey);
+    });
+  });
+
+  // Event listener penutup modal
+  if (serviceModalClose) serviceModalClose.addEventListener('click', closeServiceModal);
+  if (serviceModalBackdrop) serviceModalBackdrop.addEventListener('click', closeServiceModal);
+
+  // 4. Navigasi Khusus ke Penginapan (#penginapan)
+  const penginapanNavLinks = document.querySelectorAll('a[href="#penginapan"]');
+  penginapanNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Pastikan kategori penginapan tampak jika sedang difilter ke adventure
+      const activeTab = document.querySelector('.services-tab-btn.active');
+      if (activeTab && activeTab.getAttribute('data-service-filter') === 'adventure') {
+        const allTab = document.querySelector('.services-tab-btn[data-service-filter="all"]');
+        allTab?.click();
+      }
+
+      const penginapanCard = document.getElementById('penginapan');
+      if (penginapanCard) {
+        penginapanCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        penginapanCard.classList.remove('pulse-highlight');
+        void penginapanCard.offsetWidth; // Trigger reflow
+        penginapanCard.classList.add('pulse-highlight');
+        setTimeout(() => {
+          penginapanCard.classList.remove('pulse-highlight');
+        }, 2200);
+      }
+    });
+  });
 
   /* ----------------------------------------------------------------------------
    * 7. GALLERY FILTER & LIGHTBOX MODAL
@@ -534,10 +854,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Keyboard navigation untuk Lightbox
+  // Keyboard navigation untuk Modal & Lightbox
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (serviceModal && serviceModal.classList.contains('active')) {
+        closeServiceModal();
+      }
+      if (lightbox && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    }
     if (lightbox && lightbox.classList.contains('active')) {
-      if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowRight') showNextImage();
       if (e.key === 'ArrowLeft') showPrevImage();
     }
